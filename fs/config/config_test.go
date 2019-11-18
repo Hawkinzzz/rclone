@@ -37,7 +37,7 @@ func testConfigFile(t *testing.T, configFileName string) func() {
 	configFile = nil
 
 	LoadConfig()
-	assert.Equal(t, []string{}, getConfigData().GetSectionList())
+	assert.Equal(t, []string{}, GetRemoteConfig().ListRemotes())
 
 	// Fake a remote
 	fs.Register(&fs.RegInfo{

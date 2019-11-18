@@ -25,8 +25,10 @@ import (
 	"github.com/rclone/rclone/fs"
 	"github.com/rclone/rclone/fs/accounting"
 	"github.com/rclone/rclone/fs/cache"
+	"github.com/rclone/rclone/fs/config"
 	"github.com/rclone/rclone/fs/config/configflags"
 	"github.com/rclone/rclone/fs/config/flags"
+	"github.com/rclone/rclone/fs/config/provider/goconfig"
 	"github.com/rclone/rclone/fs/filter"
 	"github.com/rclone/rclone/fs/filter/filterflags"
 	"github.com/rclone/rclone/fs/fserrors"
@@ -365,6 +367,12 @@ func initConfig() {
 
 	// Finish parsing any command line flags
 	configflags.SetFlags()
+
+	// Register the Config Providers
+	goconfig.Register()
+
+	// Load the config
+	config.LoadConfig()
 
 	// Load filters
 	err := filterflags.Reload()
